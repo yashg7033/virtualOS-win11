@@ -134,7 +134,7 @@ export const preload = async () => {
     loadSettings(),
     fetchWorker(),
     fetchStore(),
-    loadWidget(),
+    // loadWidget(),
     fetchApp(),
   ]);
 };
