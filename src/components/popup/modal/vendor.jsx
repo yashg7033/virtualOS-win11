@@ -10,8 +10,8 @@ const ModalSelectVendor = (props) => {
 
   const [vendors, setVendors] = useState([]);
   const [vendorChoosen, setVendorChoose] = useState({ id: null });
-  const user = useSelector(state => state.user)
-  const hasPayment = user?.user_metadata?.hasPayment
+  const user = useSelector((state) => state.user);
+  const hasPayment = user?.user_metadata?.hasPayment;
 
   useEffect(() => {
     FetchApplicationTemplates(storeID).then((result) => {
@@ -27,8 +27,8 @@ const ModalSelectVendor = (props) => {
   };
 
   const handleInstallApp = () => {
-    if(hasPayment){
-      WarehousePush(`user accept pay`, user.email, user.id)
+    if (hasPayment) {
+      WarehousePush(`user accept pay`, user.email, user.id);
     }
     installApp(vendorChoosen);
   };
@@ -103,7 +103,7 @@ const ModalSelectVendor = (props) => {
         className="instbtn h-[40px] max-w-[140px] absolute bottom-0 right-0 border-none z-10"
         onClick={handleInstallApp}
       >
-        {hasPayment ? 'Pay to get' : 'Free trail'}
+        {hasPayment ? "Pay to get" : "Free trail"}
       </button>
     </div>
   );
