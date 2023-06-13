@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useCallback, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon, Image, ToolBar, LazyComponent } from "../../../utils/general";
 import "./assets/store.scss";
@@ -127,7 +132,11 @@ export const MicroStore = () => {
             ) : null}
           </div>
 
-          <div id="storeScroll" className="restWindow msfull win11Scroll" onScroll={frontScroll}>
+          <div
+            id="storeScroll"
+            className="restWindow msfull win11Scroll"
+            onScroll={frontScroll}
+          >
             {page == 0 ? <FrontPage app_click={app_click} /> : null}
             {page == 2 ? <DetailPage app={opapp} /> : null}
           </div>
