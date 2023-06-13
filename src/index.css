@@ -282,7 +282,7 @@ a {
   outline: none;
   overflow: hidden;
 }
-body[data-theme="dark"] .modalContent{
+body[data-theme="dark"] .modalContent {
   border: 1px solid #1c1f2b;
   background: #202020;
   color: #fff;
