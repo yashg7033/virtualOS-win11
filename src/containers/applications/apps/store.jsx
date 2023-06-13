@@ -327,7 +327,6 @@ const DetailPage = ({ app }) => {
         storeID: app.id,
       },
     });
-
   };
 
   const handleEdit = () => {

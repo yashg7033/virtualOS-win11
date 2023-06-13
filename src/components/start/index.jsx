@@ -69,7 +69,7 @@ export const DesktopApp = () => {
       timestamp: new Date(),
       userAgent: window?.navigator?.userAgent ?? "",
       locate: navigator?.language ?? "",
-    }); 
+    });
   }, []);
   return (
     <div className="desktopCont">
@@ -82,7 +82,7 @@ export const DesktopApp = () => {
               className="dskApp prtclk"
               tabIndex={0}
               data-action={app.action}
-              data-menu={app.type ?? 'app'}
+              data-menu={app.type ?? "app"}
               data-payload={app.payload || "full"}
               data-id={app.id ?? "null"}
               data-name={app.name}
