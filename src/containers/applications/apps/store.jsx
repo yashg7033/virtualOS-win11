@@ -48,7 +48,7 @@ export const MicroStore = () => {
 
   useLayoutEffect(() => {
     const element = document.getElementById("storeScroll");
-    element.scrollTo({ top: 120 });
+    element.scrollTo({ top: (element.scrollHeight * 30) / 100 });
   }, []);
   const frontScroll = (e) => {
     if (page == 0) {
@@ -197,7 +197,7 @@ const FrontPage = (props) => {
       </div>
       <div
         id="gamerib"
-        className="frontCont amzGames my-8 py-20 w-auto mx-8 \
+        className="storeScroll frontCont amzGames my-8 py-20 w-auto mx-8 \
         flex justify-between noscroll overflow-x-scroll overflow-y-hidden"
       >
         <div className="flex w-64 flex-col text-gray-100 h-full px-8">
@@ -253,7 +253,7 @@ const FrontPage = (props) => {
 
       <div
         id="apprib"
-        className="frontCont amzApps my-8 py-20 w-auto mx-8 \
+        className="storeScroll frontCont amzApps my-8 py-20 w-auto mx-8 \
         flex justify-between noscroll overflow-x-scroll overflow-y-hidden"
       >
         <div className="flex w-64 flex-col text-gray-100 h-full px-8  ">
@@ -268,7 +268,7 @@ const FrontPage = (props) => {
               return (
                 <div
                   key={i}
-                  className="ribcont rounded-2xl my-auto p-2 pb-2"
+                  className=" ribcont rounded-2xl my-auto p-2 pb-2 wrapperLogo"
                   onClick={() => {
                     props.app_click(app);
                   }}
