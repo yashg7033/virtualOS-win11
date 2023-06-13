@@ -58,7 +58,9 @@ export const openApp = async (appInput) =>
   wrapper(async () => {
     const payload = JSON.parse(appInput.payload);
     if (payload.desired_state != "RUNNING")
-      throw new Error(`App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`);
+      throw new Error(
+        `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`
+      );
 
     const result = await AccessApplication(payload.storage_id);
     window.open(result.url, "_blank");
