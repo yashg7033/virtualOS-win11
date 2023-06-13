@@ -325,10 +325,6 @@ const DetailPage = ({ app }) => {
       },
     });
 
-    setDown(1);
-    setTimeout(() => {
-      setDown(0);
-    }, 3000);
   };
 
   const handleEdit = () => {
