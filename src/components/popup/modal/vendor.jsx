@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { FetchApplicationTemplates } from "../../../actions/fetch";
 import { combineText } from "../../../utils/combineText";
 import { installApp } from "../../../actions/app";
+import { WarehousePush } from "../../../lib/warehouse";
+import { useSelector } from "react-redux";
 
 const ModalSelectVendor = (props) => {
   const { storeID } = props;
 
   const [vendors, setVendors] = useState([]);
   const [vendorChoosen, setVendorChoose] = useState({ id: null });
+  const user = useSelector((state) => state.user);
+  const hasPayment = user?.user_metadata?.hasPayment;
 
   useEffect(() => {
     FetchApplicationTemplates(storeID).then((result) => {
@@ -23,6 +27,9 @@ const ModalSelectVendor = (props) => {
   };
 
   const handleInstallApp = () => {
+    if (hasPayment) {
+      WarehousePush(`user accept pay`, user.email, user.id);
+    }
     installApp(vendorChoosen);
   };
 
@@ -93,11 +100,10 @@ const ModalSelectVendor = (props) => {
       </div>
 
       <button
-        className="instbtn h-[32px] max-w-[120px] absolute bottom-0 right-0 border-none z-10"
+        className="instbtn h-[40px] max-w-[140px] absolute bottom-0 right-0 border-none z-10"
         onClick={handleInstallApp}
       >
-        {" "}
-        Get{" "}
+        {hasPayment ? "Pay to get" : "Free trail"}
       </button>
     </div>
   );
