@@ -44,10 +44,10 @@ export const MicroStore = () => {
     }
   };
 
-  useLayoutEffect(()=>{
-    const element = document.getElementById('storeScroll')
-    element.scrollTo({top: element.scrollHeight * 30 / 100})
-  },[])
+  useLayoutEffect(() => {
+    const element = document.getElementById("storeScroll");
+    element.scrollTo({ top: (element.scrollHeight * 30) / 100 });
+  }, []);
   const frontScroll = (e) => {
     if (page == 0) {
       var tabs = ["sthome", "gamerib"],
