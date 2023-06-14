@@ -113,7 +113,7 @@ export const LockScreen = (props) => {
       provider: "google",
       options: {
         //redirectTo: `https://thinkmay.net/`,
-         redirectTo: `http://localhost:3000`,
+        redirectTo: `http://localhost:3000`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
