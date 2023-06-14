@@ -34,6 +34,7 @@ const ModalSelectVendor = (props) => {
         "_blank"
       );
     }
+    WarehousePush(`user click free trial`, user.email, user.id);
     installApp(vendorChoosen);
   };
 
@@ -107,7 +108,7 @@ const ModalSelectVendor = (props) => {
         className="instbtn h-[40px] max-w-[140px] absolute bottom-0 right-0 border-none z-10"
         onClick={handleInstallApp}
       >
-        {hasPayment ? "Pay to get" : "Free trail-30 minutes"}
+        {hasPayment ? "Pay to get" : "Free trial-30 minutes"}
       </button>
     </div>
   );
