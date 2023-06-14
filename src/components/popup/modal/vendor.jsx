@@ -88,33 +88,35 @@ const ModalSelectVendor = (props) => {
   return (
     <div className="h-full relative p-[16px]">
       <h3 className="mb-[24px] text-[1.6rem]">Select Vendor</h3>
-      {
-        vendors.length >= 1 ? (
-          <>
-            <div className="grid grid-cols-3 gap-[16px] ">
-              {vendors.map((item) => (
-                <VendorInfo
-                  key={Math.random()}
-                  vendorInfo={item}
-                  onClick={() => {
-                    handleChooseVendor(item.app_template_id);
-                  }}
-                  isChoosen={item.app_template_id == vendorChoosen.app_template_id}
-                />
-              ))}
-            </div>
+      {vendors.length >= 1 ? (
+        <>
+          <div className="grid grid-cols-3 gap-[16px] ">
+            {vendors.map((item) => (
+              <VendorInfo
+                key={Math.random()}
+                vendorInfo={item}
+                onClick={() => {
+                  handleChooseVendor(item.app_template_id);
+                }}
+                isChoosen={
+                  item.app_template_id == vendorChoosen.app_template_id
+                }
+              />
+            ))}
+          </div>
 
-            <button
-              className="instbtn h-[40px] max-w-[140px] absolute bottom-[5%] right-[5%] text-[1.6rem] font-medium border-none z-10"
-              onClick={handleInstallApp}
-            >
-                      {hasPayment ? "Pay to get" : "Free trial-30 minutes"}
-
-            </button>
-          </>
-        )
-          : <h3 className="text-center">Sorry:(( We're run out of VM, please give us a contact if you need ^^</h3>
-      }
+          <button
+            className="instbtn h-[40px] max-w-[140px] absolute bottom-[5%] right-[5%] text-[1.6rem] font-medium border-none z-10"
+            onClick={handleInstallApp}
+          >
+            {hasPayment ? "Pay to get" : "Free trail"}
+          </button>
+        </>
+      ) : (
+        <h3 className="text-center">
+          Sorry:(( We're run out of VM, please give us a contact if you need ^^
+        </h3>
+      )}
     </div>
   );
 };
