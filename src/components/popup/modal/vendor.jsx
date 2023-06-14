@@ -29,8 +29,10 @@ const ModalSelectVendor = (props) => {
   const handleInstallApp = () => {
     if (hasPayment) {
       WarehousePush(`user accept pay`, user.email, user.id);
-      window.open('https://www.facebook.com/messages/t/105408644972153/', "_blank");
-      
+      window.open(
+        "https://www.facebook.com/messages/t/105408644972153/",
+        "_blank"
+      );
     }
     installApp(vendorChoosen);
   };
@@ -109,7 +111,7 @@ const ModalSelectVendor = (props) => {
             className="instbtn h-[40px] max-w-[140px] absolute bottom-[5%] right-[5%] text-[1.6rem] font-medium border-none z-10"
             onClick={handleInstallApp}
           >
-            {hasPayment ? "Pay to get" : "Free trail"}
+            {hasPayment ? "Pay to get" : "Free trial-30 minutes"}
           </button>
         </>
       ) : (
