@@ -29,8 +29,10 @@ const ModalSelectVendor = (props) => {
   const handleInstallApp = () => {
     if (hasPayment) {
       WarehousePush(`user accept pay`, user.email, user.id);
-      window.open('https://www.facebook.com/messages/t/105408644972153/', "_blank");
-
+      window.open(
+        "https://www.facebook.com/messages/t/105408644972153/",
+        "_blank"
+      );
     }
     installApp(vendorChoosen);
   };
