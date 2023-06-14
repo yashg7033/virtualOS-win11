@@ -19,6 +19,10 @@ const defState = {
       width: "310px",
       secwid: "200px",
     },
+    externalApp: {
+      width: "310px",
+      secwid: "200px",
+    },
     proxy: {
       width: "150px",
       secwid: "100px",
@@ -245,6 +249,40 @@ const defState = {
       {
         name: "Properties",
         dsb: true,
+      },
+      {
+        type: "hr",
+      },
+      {
+        name: "Delete shortcut",
+        action: "performApp",
+        payload: "delshort",
+      },
+      {
+        name: "Delete",
+        action: "delApp",
+        payload: "delete",
+      },
+    ],
+    externalApp: [
+      {
+        name: "Open",
+        action: "performApp",
+        payload: "open",
+      },
+      {
+        name: "Run as administrator",
+        action: "performApp",
+        payload: "open",
+        icon: "win/shield",
+      },
+      {
+        name: "Start App",
+        action: "START_APP",
+      },
+      {
+        name: "Pause App",
+        action: "PAUSE_APP",
       },
       {
         type: "hr",

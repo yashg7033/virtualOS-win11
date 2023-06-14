@@ -96,6 +96,7 @@ export function formatAppRenderTree(data) {
           desired_state: storage.info.desired_state,
           additional: info, // TODO
         }),
+        type: "externalApp",
       };
     })
     .filter((x) => x != undefined);

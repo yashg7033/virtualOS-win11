@@ -327,11 +327,6 @@ const DetailPage = ({ app }) => {
         storeID: app.id,
       },
     });
-
-    setDown(1);
-    setTimeout(() => {
-      setDown(0);
-    }, 3000);
   };
 
   const handleEdit = () => {
