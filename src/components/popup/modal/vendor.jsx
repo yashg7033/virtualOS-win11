@@ -33,6 +33,7 @@ const ModalSelectVendor = (props) => {
         "https://www.facebook.com/messages/t/105408644972153/",
         "_blank"
       );
+      return;
     }
     WarehousePush(`user click free trial`, user.email, user.id);
     installApp(vendorChoosen);
