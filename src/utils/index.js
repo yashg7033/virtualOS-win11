@@ -22,7 +22,7 @@ var { taskbar, desktop, pinned, recent } = {
     "About Us",
     "Discord",
     "Contact Us",
-    "Thinkmay Fanpage",
+    "Facebook",
     // "Camera", //TODO
   ],
   pinned: [
@@ -43,7 +43,7 @@ var { taskbar, desktop, pinned, recent } = {
     "Github",
     "Discord",
     "Camera",
-    "Thinkmay Fanpage",
+    "Facebook",
   ],
   recent: [
     "Mail",
