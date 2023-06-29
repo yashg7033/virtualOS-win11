@@ -92,7 +92,7 @@ export const DownloadApplication = async (app_template_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null) throw "This Vendor is currently out of stock.";
   return data;
 };
 
@@ -123,7 +123,7 @@ export const AccessApplication = async (storage_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null) throw "No worker available";
   return data;
 };
 
