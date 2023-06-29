@@ -111,6 +111,7 @@ const ModalSelectVendor = (props) => {
 
           <button
             className="instbtn h-[40px] max-w-[140px] absolute bottom-[5%] right-[5%] text-[1.6rem] font-medium border-none z-10"
+            disabled={vendorChoosen.app_template_id == null}
             onClick={handleInstallApp}
           >
             {hasPayment ? "Pay to get" : "Free trial-30 minutes"}
