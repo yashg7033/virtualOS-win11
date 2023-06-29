@@ -12,7 +12,7 @@ export const log = async ({
   switch (type) {
     case "loading":
       Swal.fire({
-        title: title ?? "Loading!!",
+        title: title ?? "Loading",
         text: content ?? "Take a breath ^^",
         icon: icon ?? null,
         showCancelButton: false,
@@ -21,8 +21,8 @@ export const log = async ({
       break;
     case "error":
       Swal.fire({
-        title: title ?? "Error !!",
-        text: content ?? "Some thing went wrong!!",
+        title: title ?? "Error",
+        html: content ?? "Some thing went wrong!!",
         icon: icon ?? "error",
       });
       break;
