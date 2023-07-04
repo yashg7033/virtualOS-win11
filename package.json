@@ -31,6 +31,7 @@
     "react-error-boundary": "^3.1.4",
     "react-ga": "^3.3.1",
     "react-i18next": "^11.18.6",
+    "react-icons": "^4.10.1",
     "react-lazy-load-image-component": "^1.6.0",
     "react-modal": "^3.16.1",
     "react-player": "^2.12.0",
@@ -43,6 +44,7 @@
   },
   "scripts": {
     "start": "vite --port 3000",
+    "preview": "vite preview",
     "build": "vite build",
     "ghbuild": "CI=false vite build",
     "prettier": "prettier --write .",

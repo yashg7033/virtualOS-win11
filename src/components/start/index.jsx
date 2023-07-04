@@ -8,6 +8,8 @@ import "./searchpane.scss";
 import "./sidepane.scss";
 import "./startmenu.scss";
 import { AnalyticIdentify, AnalyticTrack } from "../../lib/segment.js";
+import { PiPauseBold } from "react-icons/pi";
+import { AiOutlineCloudDownload } from "react-icons/ai";
 
 export * from "./start";
 export * from "./widget";
@@ -47,6 +49,7 @@ export const DesktopApp = () => {
     return arr;
   });
 
+  console.log(deskApps);
   const dispatch = useDispatch();
   const handleDouble = (e) => {
     e.stopPropagation();
@@ -79,7 +82,7 @@ export const DesktopApp = () => {
             // to allow it to be focusable (:focus)
             <div
               key={i}
-              className="dskApp prtclk"
+              className="dskApp prtclk relative"
               tabIndex={0}
               data-action={app.action}
               data-menu={app.type ?? "app"}
@@ -97,6 +100,15 @@ export const DesktopApp = () => {
               />
 
               <div className="appName">{app.name}</div>
+            
+            
+            {
+              app?.status == 'PAUSED' ? 
+                <PiPauseBold className="text-[1.2rem] absolute top-0 right-0"/> 
+              : app.status == 'NOT_READY'  ?
+                <AiOutlineCloudDownload className="text-[1.2rem] absolute top-0 right-0"/>
+                : null
+            }
             </div>
           );
         })}
