@@ -1,3 +1,4 @@
+import { externalLink } from "../../data/constant";
 import supabase from "../../supabase/createClient";
 
 const getCredentialHeader = async () => {
@@ -98,7 +99,7 @@ export const DownloadApplication = async (app_template_id) => {
     console.log(res);
     return res
   } catch (error) {
-    throw error
+    throw `<p> This Vendor is currently out of stock 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
   }
   //const { data, error } = await supabase.functions.invoke(
   //  "request_application",
@@ -142,7 +143,8 @@ export const AccessApplication = async (storage_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null)
+    throw `<p> No worker available 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
   return data;
 };
 
