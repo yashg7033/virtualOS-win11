@@ -17,7 +17,7 @@ const wrapper = async (func) => {
     log({
       type: "loading",
       content:
-        "It took a minutes!, Meanwhile you can go and explore Thinkmay ^^",
+        "It took about 5 minutes, take a break🧐",
     });
     const result = await func();
     await log({
