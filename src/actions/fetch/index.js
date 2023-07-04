@@ -81,18 +81,37 @@ export const CreateWorkerSession = async (worker_profile_id) => {
 };
 
 export const DownloadApplication = async (app_template_id) => {
-  const { data, error } = await supabase.functions.invoke(
-    "request_application",
-    {
-      headers: await getCredentialHeader(),
+  try {
+    const headers = await getCredentialHeader()
+    console.log(headers);
+    const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/request_application`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...headers
+      },
       method: "POST",
       body: JSON.stringify({
         action: "SETUP",
         app_template_id: app_template_id,
       }),
-    }
-  );
-  if (error != null) throw error;
+    })
+    console.log(res);
+    return res
+  } catch (error) {
+    throw error
+  }
+  //const { data, error } = await supabase.functions.invoke(
+  //  "request_application",
+  //  {
+  //    headers: await getCredentialHeader(),
+  //    method: "POST",
+  //    body: JSON.stringify({
+  //      action: "SETUP",
+  //      app_template_id: app_template_id,
+  //    }),
+  //  }
+  //);
+  //if (error != null) throw error;
   return data;
 };
 
