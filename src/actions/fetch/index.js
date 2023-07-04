@@ -85,10 +85,12 @@ export const DownloadApplication = async (app_template_id) => {
   try {
     const headers = await getCredentialHeader()
     console.log(headers);
-    const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/request_application`, {
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+    const res = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/request_application`, {
       headers: {
         "Content-Type": "application/json",
-        ...headers
+        "Authorization": `Bearer ${supabaseAnonKey}`,
+        "Access_token": headers.access_token,
       },
       method: "POST",
       body: JSON.stringify({
@@ -96,10 +98,16 @@ export const DownloadApplication = async (app_template_id) => {
         app_template_id: app_template_id,
       }),
     })
+
     console.log(res);
+    if (res.ok === false) {
+      const resText = await res.text()
+      throw new Error(resText)
+    }
     return res
   } catch (error) {
-    throw `<p> This Vendor is currently out of stock 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+    throw error
+    //throw `<p> This Vendor is currently out of stock 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
   }
   //const { data, error } = await supabase.functions.invoke(
   //  "request_application",
