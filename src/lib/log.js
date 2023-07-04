@@ -17,6 +17,7 @@ export const log = async ({
         icon: icon ?? null,
         showCancelButton: false,
         showConfirmButton: false,
+        allowOutsideClick: false
       });
       break;
     case "error":
@@ -72,7 +73,7 @@ export const log = async ({
 };
 
 export class Log {
-  constructor() {}
+  constructor() { }
   loading(title, content, time, icon) {
     Swal.fire({
       title: title ?? "Loading!",
