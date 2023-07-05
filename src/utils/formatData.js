@@ -73,7 +73,7 @@ export function formatAppRenderTree(data) {
     .map((storage) => {
       if (storage.type == "processing_resource") {
         return {
-          name: `${storage.name} installing`,
+          name: `${storage.name} (INSTALLING)`,
           icon: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/bb62785b-c54a-44e6-94bf-1ccca295023c/delruxq-390edd6a-59c7-47d3-a150-b8460f53119c.png",
           action: "CLOUDAPP",
           payload: JSON.stringify({
@@ -89,7 +89,8 @@ export function formatAppRenderTree(data) {
       if (info == undefined || storage.info.desired_state == "DELETED") return;
 
       return {
-        name: `${info.title} ${storage.info.id}`,
+        name: `${info.title} ${storage.info.id} 
+                  ${storage.info.desired_state === "PAUSED" ? "- (PAUSED)" : ''}`,
         icon: info.icon,
         action: "CLOUDAPP",
         payload: JSON.stringify({
