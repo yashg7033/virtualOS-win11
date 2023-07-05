@@ -81,54 +81,51 @@ export const CreateWorkerSession = async (worker_profile_id) => {
   return data;
 };
 
-export const DownloadApplication = async (app_template_id) => {
+const SupabaseFuncInvoke = async (funcName, options) => {
   try {
-    const headers = await getCredentialHeader()
-    console.log(headers);
+    const credential = await getCredentialHeader()
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-    const res = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/request_application`, {
+    const res = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`, {
+      ...options,
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${supabaseAnonKey}`,
-        "Access_token": headers.access_token,
-      },
+        "Access_token": credential.access_token,
+      }
+    })
+    if (res.ok === false) {
+      const resText = await res.text()
+      return { data: null, error: resText }
+
+    }
+    console.log(res);
+    return { data: res, error: null }
+  } catch (error) {
+    return { data: null, error }
+  }
+}
+
+export const DownloadApplication = async (app_template_id) => {
+  const { data, error } = await SupabaseFuncInvoke(
+    "request_application",
+    {
       method: "POST",
       body: JSON.stringify({
         action: "SETUP",
         app_template_id: app_template_id,
       }),
-    })
-
-    console.log(res);
-    if (res.ok === false) {
-      const resText = await res.text()
-      throw new Error(resText)
     }
-    return res
-  } catch (error) {
-    throw error
-    //throw `<p> This Vendor is currently out of stock 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
-  }
-  //const { data, error } = await supabase.functions.invoke(
-  //  "request_application",
-  //  {
-  //    headers: await getCredentialHeader(),
-  //    method: "POST",
-  //    body: JSON.stringify({
-  //      action: "SETUP",
-  //      app_template_id: app_template_id,
-  //    }),
-  //  }
-  //);
-  //if (error != null) throw error;
+  );
+  if (error != null)
+    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+
   return data;
 };
 
 export const StartApplication = async (storage_id) => {
-  const { data, error } = await supabase.functions.invoke(
+  const { data, error } = await SupabaseFuncInvoke(
     "request_application",
     {
-      headers: await getCredentialHeader(),
       method: "POST",
       body: JSON.stringify({
         action: "START",
@@ -136,14 +133,15 @@ export const StartApplication = async (storage_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null)
+    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+
   return data;
 };
 export const AccessApplication = async (storage_id) => {
-  const { data, error } = await supabase.functions.invoke(
+  const { data, error } = await SupabaseFuncInvoke(
     "request_application",
     {
-      headers: await getCredentialHeader(),
       method: "POST",
       body: JSON.stringify({
         action: "ACCESS",
@@ -152,12 +150,15 @@ export const AccessApplication = async (storage_id) => {
     }
   );
   if (error != null)
-    throw `<p> No worker available 🙄 </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+  console.log(data, 'AccessAp');
   return data;
 };
 
 export const DeleteApplication = async (storage_id) => {
-  const { data, error } = await supabase.functions.invoke(
+  const { data, error } = await supabase.functions.invo
+
+  ke(
     "request_application",
     {
       headers: await getCredentialHeader(),
@@ -168,15 +169,16 @@ export const DeleteApplication = async (storage_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null)
+    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+
   return data;
 };
 
 export const StopApplication = async (storage_id) => {
-  const { data, error } = await supabase.functions.invoke(
+  const { data, error } = await SupabaseFuncInvoke(
     "request_application",
     {
-      headers: await getCredentialHeader(),
       method: "POST",
       body: JSON.stringify({
         action: "STOP",
@@ -184,7 +186,9 @@ export const StopApplication = async (storage_id) => {
       }),
     }
   );
-  if (error != null) throw error;
+  if (error != null)
+    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+
   return data;
 };
 
