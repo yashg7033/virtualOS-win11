@@ -17,7 +17,7 @@ const wrapper = async (func) => {
     log({
       type: "loading",
       content:
-        "It took about 5 minutes, take a break🧐",
+        "It took a minute, take a break🧐",
     });
     const result = await func();
     await log({
@@ -61,12 +61,18 @@ export const deleteStore = async (app) => {
 export const openApp = async (appInput) =>
   wrapper(async () => {
     const payload = JSON.parse(appInput.payload);
-    if (payload.desired_state != "RUNNING")
+
+    if (payload.desired_state === "NOT_READY")
       throw new Error(
         `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`
       );
-
+    if (payload.desired_state == "PAUSED") {
+      await StartApplication(payload.storage_id);
+      //fetchApp();
+      await new Promise(r => setTimeout(r, 5000));
+    }
     const result = await AccessApplication(payload.storage_id);
+    console.log(result, 'openapp');
     window.open(result.url, "_blank");
   });
 
@@ -82,7 +88,7 @@ export const startApp = async (appInput) =>
   wrapper(async () => {
     const payload = JSON.parse(appInput.payload);
     if (payload.desired_state != "PAUSED")
-      throw new Error(`app is not paused yet`);
+      throw new Error(`App is not paused yet`);
 
     await StartApplication(payload.storage_id);
     fetchApp();
