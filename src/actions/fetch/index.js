@@ -85,7 +85,7 @@ const SupabaseFuncInvoke = async (funcName, options) => {
   try {
     const credential = await getCredentialHeader()
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-    const res = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`, {
+    const response = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`, {
       ...options,
       headers: {
         "Content-Type": "application/json",
@@ -93,13 +93,25 @@ const SupabaseFuncInvoke = async (funcName, options) => {
         "Access_token": credential.access_token,
       }
     })
-    if (res.ok === false) {
-      const resText = await res.text()
+    if (response.ok === false) {
+      const resText = await response.text()
       return { data: null, error: resText }
 
     }
-    console.log(res);
-    return { data: res, error: null }
+    let responseType = (response.headers.get('Content-Type') ?? 'text/plain').split(';')[0].trim()
+    let data
+    if (responseType === 'application/json') {
+      data = await response.json()
+    } else if (responseType === 'application/octet-stream') {
+      data = await response.blob()
+    } else if (responseType === 'multipart/form-data') {
+      data = await response.formData()
+    } else {
+      // default to text
+      data = await response.text()
+    }
+    return { data, error: null }
+
   } catch (error) {
     return { data: null, error }
   }
