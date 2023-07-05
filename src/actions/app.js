@@ -61,7 +61,6 @@ export const deleteStore = async (app) => {
 export const openApp = async (appInput) =>
   wrapper(async () => {
     const payload = JSON.parse(appInput.payload);
-
     if (payload.desired_state === "NOT_READY")
       throw new Error(
         `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`
@@ -72,7 +71,6 @@ export const openApp = async (appInput) =>
       await new Promise(r => setTimeout(r, 5000));
     }
     const result = await AccessApplication(payload.storage_id);
-    console.log(result, 'openapp');
     window.open(result.url, "_blank");
   });
 

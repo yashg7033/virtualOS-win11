@@ -163,7 +163,6 @@ export const AccessApplication = async (storage_id) => {
   );
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
-  console.log(data, 'AccessAp');
   return data;
 };
 
