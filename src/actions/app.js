@@ -7,7 +7,6 @@ import {
   AccessApplication,
   DeleteApplication,
   DownloadApplication,
-  FetchUserApplication,
   StartApplication,
   StopApplication,
 } from "./fetch";
@@ -67,11 +66,10 @@ export const openApp = async (appInput) =>
       );
     if (payload.desired_state == "PAUSED") {
       await StartApplication(payload.storage_id);
-      //fetchApp();
-      await new Promise(r => setTimeout(r, 5000));
     }
     const result = await AccessApplication(payload.storage_id);
     window.open(result.url, "_blank");
+    fetchApp();
   });
 
 // Handle app
