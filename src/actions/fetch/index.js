@@ -31,7 +31,7 @@ export const FetchAuthorizedWorkers = async () => {
       headers: await getCredentialHeader(),
       method: "POST",
       body: JSON.stringify({ use_case: "web" }),
-    }
+    },
   );
   if (error != null) throw error;
   return data;
@@ -43,7 +43,7 @@ export const FetchUserApplication = async () => {
       headers: await getCredentialHeader(),
       method: "POST",
       body: JSON.stringify({}),
-    }
+    },
   );
   if (error != null) throw error;
   return data;
@@ -58,7 +58,7 @@ export const DeactivateWorkerSession = async (worker_session_id) => {
       body: JSON.stringify({
         worker_session_id: worker_session_id,
       }),
-    }
+    },
   );
   if (error != null) throw error;
   return data;
@@ -75,7 +75,7 @@ export const CreateWorkerSession = async (worker_profile_id) => {
         soudcard_name: null,
         monitor_name: null,
       }),
-    }
+    },
   );
   if (error != null) throw error;
   return data;
@@ -83,51 +83,51 @@ export const CreateWorkerSession = async (worker_profile_id) => {
 
 const SupabaseFuncInvoke = async (funcName, options) => {
   try {
-    const credential = await getCredentialHeader()
-    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-    const response = await fetch(`https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${supabaseAnonKey}`,
-        "Access_token": credential.access_token,
-      }
-    })
+    const credential = await getCredentialHeader();
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const response = await fetch(
+      `https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`,
+      {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabaseAnonKey}`,
+          Access_token: credential.access_token,
+        },
+      },
+    );
     if (response.ok === false) {
-      const resText = await response.text()
-      return { data: null, error: resText }
-
+      const resText = await response.text();
+      return { data: null, error: resText };
     }
-    let responseType = (response.headers.get('Content-Type') ?? 'text/plain').split(';')[0].trim()
-    let data
-    if (responseType === 'application/json') {
-      data = await response.json()
-    } else if (responseType === 'application/octet-stream') {
-      data = await response.blob()
-    } else if (responseType === 'multipart/form-data') {
-      data = await response.formData()
+    let responseType = (response.headers.get("Content-Type") ?? "text/plain")
+      .split(";")[0]
+      .trim();
+    let data;
+    if (responseType === "application/json") {
+      data = await response.json();
+    } else if (responseType === "application/octet-stream") {
+      data = await response.blob();
+    } else if (responseType === "multipart/form-data") {
+      data = await response.formData();
     } else {
       // default to text
-      data = await response.text()
+      data = await response.text();
     }
-    return { data, error: null }
-
+    return { data, error: null };
   } catch (error) {
-    return { data: null, error }
+    return { data: null, error };
   }
-}
+};
 
 export const DownloadApplication = async (app_template_id) => {
-  const { data, error } = await SupabaseFuncInvoke(
-    "request_application",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "SETUP",
-        app_template_id: app_template_id,
-      }),
-    }
-  );
+  const { data, error } = await SupabaseFuncInvoke("request_application", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "SETUP",
+      app_template_id: app_template_id,
+    }),
+  });
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
@@ -135,51 +135,42 @@ export const DownloadApplication = async (app_template_id) => {
 };
 
 export const StartApplication = async (storage_id) => {
-  const { data, error } = await SupabaseFuncInvoke(
-    "request_application",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "START",
-        storage_id: storage_id,
-      }),
-    }
-  );
+  const { data, error } = await SupabaseFuncInvoke("request_application", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "START",
+      storage_id: storage_id,
+    }),
+  });
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
   return data;
 };
 export const AccessApplication = async (storage_id) => {
-  const { data, error } = await SupabaseFuncInvoke(
-    "request_application",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "ACCESS",
-        storage_id: storage_id,
-      }),
-    }
-  );
+  const { data, error } = await SupabaseFuncInvoke("request_application", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "ACCESS",
+      storage_id: storage_id,
+    }),
+  });
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
   return data;
 };
 
 export const DeleteApplication = async (storage_id) => {
-  const { data, error } = await supabase.functions.invo
+  const { data, error } = await supabase.functions.invo;
 
-  ke(
-    "request_application",
-    {
-      headers: await getCredentialHeader(),
-      method: "POST",
-      body: JSON.stringify({
-        action: "DELETE",
-        storage_id: storage_id,
-      }),
-    }
-  );
+  ke("request_application", {
+    headers: await getCredentialHeader(),
+    method: "POST",
+    body: JSON.stringify({
+      action: "DELETE",
+      storage_id: storage_id,
+    }),
+  });
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
@@ -187,16 +178,13 @@ export const DeleteApplication = async (storage_id) => {
 };
 
 export const StopApplication = async (storage_id) => {
-  const { data, error } = await SupabaseFuncInvoke(
-    "request_application",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "STOP",
-        storage_id: storage_id,
-      }),
-    }
-  );
+  const { data, error } = await SupabaseFuncInvoke("request_application", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "STOP",
+      storage_id: storage_id,
+    }),
+  });
   if (error != null)
     throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
@@ -220,14 +208,14 @@ export const FetchApplicationTemplates = async (id) => {
     .eq("type", "APP")
     .in(
       "id",
-      app_template_query.data.map((x) => x.resource_id)
+      app_template_query.data.map((x) => x.resource_id),
     );
   if (vendor_resource_query.error != null) return vendor_resource_query.error;
 
   return app_template_query.data
     .map((x) => {
       const resource = vendor_resource_query.data.find(
-        (y) => x.resource_id == y.id
+        (y) => x.resource_id == y.id,
       );
       if (resource == undefined) return undefined;
 
@@ -248,9 +236,8 @@ export const RegisterProxy = async () => {
   const { data, error } = await supabase.functions.invoke("proxy_register", {
     body: JSON.stringify(body),
     headers: {
-      access_token: (
-        await supabase.auth.getSession()
-      ).data?.session?.access_token,
+      access_token: (await supabase.auth.getSession()).data?.session
+        ?.access_token,
     },
   });
   if (error != null) throw error;
@@ -261,9 +248,8 @@ export const Keygen = async () => {
   const { data, error } = await supabase.functions.invoke("user_keygen", {
     body: JSON.stringify({}),
     headers: {
-      access_token: (
-        await supabase.auth.getSession()
-      ).data?.session?.access_token,
+      access_token: (await supabase.auth.getSession()).data?.session
+        ?.access_token,
     },
   });
   if (error != null) throw error;

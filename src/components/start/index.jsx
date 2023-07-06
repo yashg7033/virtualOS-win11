@@ -99,15 +99,12 @@ export const DesktopApp = () => {
               />
 
               <div className="appName">{app.name}</div>
-            
-            
-            {
-              app?.status == 'PAUSED' ? 
-                <PiPauseBold className="text-[1.2rem] absolute top-[-3px] right-[-3px]"/> 
-              : app.status == 'NOT_READY'  ?
-                <AiOutlineCloudDownload className="text-[1.2rem] absolute top-[-3px] right-[-3px]"/>
-                : null
-            }
+
+              {app?.status == "PAUSED" ? (
+                <PiPauseBold className="text-[1.2rem] absolute top-[-3px] right-[-3px]" />
+              ) : app.status == "NOT_READY" ? (
+                <AiOutlineCloudDownload className="text-[1.2rem] absolute top-[-3px] right-[-3px]" />
+              ) : null}
             </div>
           );
         })}
@@ -173,7 +170,7 @@ export const SidePane = () => {
   function sliderBackground(elem, e) {
     elem.style.setProperty(
       "--track-color",
-      `linear-gradient(90deg, var(--clrPrm) ${e - 3}%, #888888 ${e}%)`
+      `linear-gradient(90deg, var(--clrPrm) ${e - 3}%, #888888 ${e}%)`,
     );
   }
 

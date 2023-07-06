@@ -12,8 +12,8 @@ import { sleep } from "../utils/sleep";
 
 const loadWidget = async () => {
   var tmpWdgt = {
-    ...store.getState().widpane,
-  },
+      ...store.getState().widpane,
+    },
     date = new Date();
 
   // console.log('fetching ON THIS DAY');
@@ -33,7 +33,7 @@ const loadWidget = async () => {
 
       tmpWdgt.data.event = event;
     })
-    .catch((error) => { });
+    .catch((error) => {});
 
   // console.log('fetching NEWS');
   await axios
@@ -47,7 +47,7 @@ const loadWidget = async () => {
       });
       tmpWdgt.data.news = newsList;
     })
-    .catch((error) => { });
+    .catch((error) => {});
 
   store.dispatch({
     type: "WIDGREST",
@@ -82,7 +82,7 @@ export const fetchApp = async () => {
     payload: [...apps],
   });
 
-  await sleep(10000)
+  await sleep(10000);
 };
 
 // TODO
@@ -105,7 +105,7 @@ export const fetchStore = async () => {
   const { data, error } = await supabase
     .from("store")
     .select(
-      "id,title,icon,type,metadata->description,metadata->screenshoots,metadata->feature"
+      "id,title,icon,type,metadata->description,metadata->screenshoots,metadata->feature",
     )
     .in("type", ["GAME", "APP"]);
   if (error != null) throw error;

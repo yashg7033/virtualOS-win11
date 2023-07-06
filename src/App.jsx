@@ -55,7 +55,7 @@ function App() {
     } catch (err) {}
 
     var actionType0 = getComputedStyle(event.target).getPropertyValue(
-      "--prefix"
+      "--prefix",
     );
 
     ess.forEach((item, i) => {

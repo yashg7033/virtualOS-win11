@@ -15,8 +15,7 @@ const wrapper = async (func) => {
   try {
     log({
       type: "loading",
-      content:
-        "It took a minute, take a break🧐",
+      content: "It took a minute, take a break🧐",
     });
     const result = await func();
     await log({
@@ -62,7 +61,7 @@ export const openApp = async (appInput) =>
     const payload = JSON.parse(appInput.payload);
     if (payload.desired_state === "NOT_READY")
       throw new Error(
-        `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`
+        `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`,
       );
     if (payload.desired_state == "PAUSED") {
       await StartApplication(payload.storage_id);
