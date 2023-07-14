@@ -129,9 +129,9 @@ export const DownloadApplication = async (app_template_id) => {
     }),
   });
   if (error != null) {
-    let msg = error
-    if (error === 'run out of gpu stock') {
-      msg = 'Hệ thông đang hết máy, bạn quay lại sau nhé.'
+    let msg = error;
+    if (error === "run out of gpu stock") {
+      msg = "Hệ thông đang hết máy, bạn quay lại sau nhé.";
     }
     throw `<p> 
               
@@ -154,9 +154,9 @@ export const StartApplication = async (storage_id) => {
     }),
   });
   if (error != null) {
-    let msg = error
-    if (error === 'run out of gpu stock') {
-      msg = 'Hệ thông đang hết máy, bạn quay lại sau nhé.'
+    let msg = error;
+    if (error === "run out of gpu stock") {
+      msg = "Hệ thông đang hết máy, bạn quay lại sau nhé.";
     }
     throw `<p> 
               

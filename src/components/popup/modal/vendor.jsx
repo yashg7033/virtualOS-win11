@@ -12,8 +12,8 @@ const ModalSelectVendor = (props) => {
   const [vendors, setVendors] = useState([]);
   const [vendorChoosen, setVendorChoose] = useState({ id: null });
   const user = useSelector((state) => state.user);
-  const hasPayment = user?.user_metadata?.paid || user?.app_metadata?.role =='admin'  ;
-
+  const hasPayment =
+    user?.user_metadata?.paid || user?.app_metadata?.role == "admin";
 
   useEffect(() => {
     FetchApplicationTemplates(storeID).then((result) => {
@@ -37,10 +37,15 @@ const ModalSelectVendor = (props) => {
       //);
       //return;
       installApp(vendorChoosen);
-      return
+      return;
     }
     WarehousePush(`user click free trial`, user.email, user.id);
-    log({type:'error', icon: 'info', title: 'Thông báo', content:`<p>Liên hệ admin để thanh toán dịch vụ hoặc đăng kí trải nghiệm <a href="https://www.facebook.com/thinkonmay" target="_blank"> tại đây </a></p>`})
+    log({
+      type: "error",
+      icon: "info",
+      title: "Thông báo",
+      content: `<p>Liên hệ admin để thanh toán dịch vụ hoặc đăng kí trải nghiệm <a href="https://www.facebook.com/thinkonmay" target="_blank"> tại đây </a></p>`,
+    });
   };
 
   const renderVendorInfo = (data) => {
