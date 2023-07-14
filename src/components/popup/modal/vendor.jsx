@@ -4,6 +4,7 @@ import { combineText } from "../../../utils/combineText";
 import { installApp } from "../../../actions/app";
 import { WarehousePush } from "../../../lib/warehouse";
 import { useSelector } from "react-redux";
+import { log } from "../../../lib/log";
 
 const ModalSelectVendor = (props) => {
   const { storeID } = props;
@@ -11,7 +12,8 @@ const ModalSelectVendor = (props) => {
   const [vendors, setVendors] = useState([]);
   const [vendorChoosen, setVendorChoose] = useState({ id: null });
   const user = useSelector((state) => state.user);
-  const hasPayment = user?.user_metadata?.hasPayment;
+  const hasPayment = user?.user_metadata?.paid || user?.app_metadata?.role =='admin'  ;
+
 
   useEffect(() => {
     FetchApplicationTemplates(storeID).then((result) => {
@@ -28,15 +30,17 @@ const ModalSelectVendor = (props) => {
 
   const handleInstallApp = () => {
     if (hasPayment) {
-      WarehousePush(`user accept pay`, user.email, user.id);
-      window.open(
-        "https://www.facebook.com/messages/t/105408644972153/",
-        "_blank",
-      );
-      return;
+      //WarehousePush(`user accept pay`, user.email, user.id);
+      //window.open(
+      //  "https://www.facebook.com/messages/t/105408644972153/",
+      //  "_blank",
+      //);
+      //return;
+      installApp(vendorChoosen);
+      return
     }
     WarehousePush(`user click free trial`, user.email, user.id);
-    installApp(vendorChoosen);
+    log({type:'error', icon: 'info', title: 'Thông báo', content:`<p>Liên hệ admin để thanh toán dịch vụ hoặc đăng kí trải nghiệm <a href="https://www.facebook.com/thinkonmay" target="_blank"> tại đây </a></p>`})
   };
 
   const renderVendorInfo = (data) => {
@@ -114,7 +118,7 @@ const ModalSelectVendor = (props) => {
             disabled={vendorChoosen.app_template_id == null}
             onClick={handleInstallApp}
           >
-            {hasPayment ? "Pay to get" : "Free trial-30 minutes"}
+            {hasPayment ? "Get" : "Trial-30 minutes."}
           </button>
         </>
       ) : (
