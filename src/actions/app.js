@@ -64,7 +64,9 @@ export const openApp = async (appInput) =>
         `App would be available about 3 minutes after download, Contact us (via email box) if it is stil unavailable`,
       );
     if (payload.desired_state == "PAUSED") {
-      await StartApplication(payload.storage_id);
+      throw new Error(
+        `App has paused, Please Start App and wait 2-3 minutes and get back to open APP`,
+      );
     }
     const result = await AccessApplication(payload.storage_id);
     window.open(result.url, "_blank");
