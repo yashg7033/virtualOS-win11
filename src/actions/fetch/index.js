@@ -128,8 +128,19 @@ export const DownloadApplication = async (app_template_id) => {
       app_template_id: app_template_id,
     }),
   });
-  if (error != null)
-    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+  if (error != null) {
+    let msg = error
+    if (error === 'run out of gpu stock') {
+      msg = 'Hệ thông đang hết máy, bạn quay lại sau nhé.'
+    }
+    throw `<p> 
+              
+              </br>
+              <b class='uppercase'>${msg}. Please reload and try it again, in fews minutes.</b> 
+              </br> Join 
+            <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. 
+          <p>`;
+  }
 
   return data;
 };
@@ -142,8 +153,19 @@ export const StartApplication = async (storage_id) => {
       storage_id: storage_id,
     }),
   });
-  if (error != null)
-    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+  if (error != null) {
+    let msg = error
+    if (error === 'run out of gpu stock') {
+      msg = 'Hệ thông đang hết máy, bạn quay lại sau nhé.'
+    }
+    throw `<p> 
+              
+              </br>
+              <b class='uppercase'>${msg} Please reload and try it again, in fews minutes.</b> 
+              </br> Join 
+            <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. 
+          <p>`;
+  }
 
   return data;
 };
@@ -156,7 +178,7 @@ export const AccessApplication = async (storage_id) => {
     }),
   });
   if (error != null)
-    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+    throw `<p> <br class='uppercase'>${error}. </br> Please reload and try it again, in fews minutes.</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
   return data;
 };
 
@@ -172,7 +194,7 @@ export const DeleteApplication = async (storage_id) => {
     }),
   });
   if (error != null)
-    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+    throw `<p> <b class='uppercase'>${error} Please reload and try it again, in fews minutes.</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
   return data;
 };
@@ -186,7 +208,7 @@ export const StopApplication = async (storage_id) => {
     }),
   });
   if (error != null)
-    throw `<p> <b class='uppercase'>${error}</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
+    throw `<p> <b class='uppercase'>${error} Please reload and try it again, in fews minutes.</b> </br> Join <a target='_blank' href=${externalLink.DISCORD_LINK}>Thinkmay Discord</a> for support. <p>`;
 
   return data;
 };
