@@ -38,7 +38,7 @@ const ModalSelectVendor = (props) => {
       installApp(vendorChoosen);
       return;
     }
-    logFEEvent(`click free trial ${user.email} ${user.id}`)
+    logFEEvent(`click free trial ${user.email} ${user.id}`);
     log({
       type: "error",
       icon: "info",
