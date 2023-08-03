@@ -102,9 +102,12 @@ export const fetchWorker = async () => {
 };
 
 export const fetchStore = async () => {
-  const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnY2t3anVja2xld3N1Y29jZmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODk2NzA5MTcsImV4cCI6MjAwNTI0NjkxN30.Ldcg3VJWf5fS5_SFmnfX2ZKHEfNoM9DPhoJFBStjjpA'
-  const resp = await fetch(`https://dgckwjucklewsucocfgw.supabase.co/rest/v1/stores?select=id,name,icon,type,metadata->description,metadata->screenshoots,metadata->feature`, {
-      method: "GET",  
+  const key =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnY2t3anVja2xld3N1Y29jZmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODk2NzA5MTcsImV4cCI6MjAwNTI0NjkxN30.Ldcg3VJWf5fS5_SFmnfX2ZKHEfNoM9DPhoJFBStjjpA";
+  const resp = await fetch(
+    `https://dgckwjucklewsucocfgw.supabase.co/rest/v1/stores?select=id,name,icon,type,metadata->description,metadata->screenshoots,metadata->feature`,
+    {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${key}`,
@@ -112,8 +115,7 @@ export const fetchStore = async () => {
       },
     },
   );
-  if (resp.status != 200) 
-    throw await resp.text();
+  if (resp.status != 200) throw await resp.text();
   const data = await resp.json();
 
   const content = {
