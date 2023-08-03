@@ -223,7 +223,7 @@ const FrontPage = (props) => {
                     src={game.icon}
                   />
                   <div className="capitalize text-xs font-semibold">
-                    {game.title}
+                    {game.name}
                   </div>
                   <div className="flex mt-2 items-center">
                     <Icon className="bluestar" fafa="faStar" width={6} />
