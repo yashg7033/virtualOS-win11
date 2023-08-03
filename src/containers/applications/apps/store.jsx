@@ -14,7 +14,7 @@ import store from "../../../reducers";
 import { AnalyticTrack } from "../../../lib/segment";
 import { isAdmin } from "../../../utils/isAdmin";
 import { fetchStore } from "../../../actions/preload";
-import { WarehousePush } from "../../../lib/warehouse";
+import { logFEEvent } from "../../../utils/log_front_end.js";
 
 const emap = (v) => {
   v = Math.min(1 / v, 10);
@@ -76,7 +76,7 @@ export const MicroStore = () => {
   const app_click = async (data) => {
     setOpapp(data);
     setPage(2);
-    WarehousePush("open store", user.email, user.id, data);
+    logFEEvent(`open store ${user.email}`, data);
     AnalyticTrack(`open store`, {
       name: data.title,
       timestamp: new Date(),
