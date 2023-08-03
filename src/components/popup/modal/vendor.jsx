@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { FetchApplicationTemplates } from "../../../actions/fetch";
 import { combineText } from "../../../utils/combineText";
 import { installApp } from "../../../actions/app";
-import { WarehousePush } from "../../../lib/warehouse";
 import { useSelector } from "react-redux";
 import { log } from "../../../lib/log";
+import { logFEEvent } from "../../../utils/log_front_end.js";
 
 const ModalSelectVendor = (props) => {
   const { storeID } = props;
@@ -30,7 +30,6 @@ const ModalSelectVendor = (props) => {
 
   const handleInstallApp = () => {
     if (hasPayment) {
-      //WarehousePush(`user accept pay`, user.email, user.id);
       //window.open(
       //  "https://www.facebook.com/messages/t/105408644972153/",
       //  "_blank",
@@ -39,7 +38,7 @@ const ModalSelectVendor = (props) => {
       installApp(vendorChoosen);
       return;
     }
-    WarehousePush(`user click free trial`, user.email, user.id);
+    logFEEvent(`click free trial ${user.email} ${user.id}`)
     log({
       type: "error",
       icon: "info",

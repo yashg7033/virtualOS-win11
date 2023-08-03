@@ -26,7 +26,7 @@ import ReactModal from "react-modal";
 import Popup from "./components/popup";
 import { preload } from "./actions/preload";
 import { AnalyticTrack } from "./lib/segment";
-import { WarehousePush } from "./lib/warehouse";
+import { logFEEvent } from "./utils/log_front_end.js";
 
 const TRACKING_ID = "G-C772WT3BD0";
 ReactGA.initialize(TRACKING_ID);
@@ -131,7 +131,9 @@ function App() {
   const refSource = urlParams.get("ref") ?? null;
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
-    WarehousePush(`source ${refSource}`, user.email, user.id);
+    if (window.location.href == 'http://thinkmay.net/')
+      logFEEvent(`from source ${refSource} ${user.email}`);
+
     AnalyticTrack(`source ${refSource}`);
     window.history.replaceState({}, document.title, "/" + "");
   }, []);
