@@ -153,9 +153,9 @@ export const LockScreen = (props) => {
           <h2 className="text-center">Are you</h2>
           <div className="flex gap-5 flex-wrap justify-center mt-[1em]">
             <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
-              onClick ={action}
+              onClick={action}
               data-action="splash"
-              data-user="B2B"
+              data-user="B2C"
             >
               <h4 className="text-center">Want to</h4>
               <p className="mt-[8px]">
@@ -173,7 +173,7 @@ export const LockScreen = (props) => {
             <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
               onClick={action}
               data-action="splash"
-              data-user="B2C"
+              data-user="B2B"
             >
               <h4 className="text-center">Looking for</h4>
               <div className="mt-[8px]">
