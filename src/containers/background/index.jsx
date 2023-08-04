@@ -88,20 +88,8 @@ export const LockScreen = (props) => {
     const userType = e.target.dataset.user //B2B or B2C. Change at: data-user
 
 
-    if (act == "splash") setLock(true);
-    else if (act == "inpass") {
-      var val = e.target.value;
-      if (!passType) {
-        val = val.substring(0, 4);
-        val = !Number(val) ? "" : val;
-      }
-
-      setPass(val);
-    } else if (act == "forgot") setForget(true);
-    else if (act == "pinlock") setType(0);
-    else if (act == "passkey") setType(1);
-
-    if (act == "pinlock" || act == "passkey") setPass("");
+    setLock(true);
+    
   };
 
   const proceed = async () => {
@@ -165,7 +153,7 @@ export const LockScreen = (props) => {
           <h2 className="text-center">Are you</h2>
           <div className="flex gap-5 flex-wrap justify-center mt-[1em]">
             <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
-              onClick={action}
+              onClick ={action}
               data-action="splash"
               data-user="B2B"
             >
