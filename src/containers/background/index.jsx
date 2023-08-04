@@ -4,7 +4,7 @@ import Battery from "../../components/shared/Battery";
 import { Icon, Image } from "../../utils/general";
 import "./back.scss";
 import supabase from "../../supabase/createClient";
-
+import ReactTyped from "react-typed";
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
   const dispatch = useDispatch();
@@ -52,6 +52,8 @@ export const BootScreen = (props) => {
     <div className="bootscreen">
       <div className={blackout ? "hidden" : ""}>
         <Image src="asset/bootlogo" w={180} />
+
+
         <div className="mt-48" id="loader">
           <svg
             className="progressRing"
@@ -83,21 +85,11 @@ export const LockScreen = (props) => {
   const action = (e) => {
     var act = e.target.dataset.action,
       payload = e.target.dataset.payload;
+    const userType = e.target.dataset.user //B2B or B2C. Change at: data-user
 
-    if (act == "splash") setLock(true);
-    else if (act == "inpass") {
-      var val = e.target.value;
-      if (!passType) {
-        val = val.substring(0, 4);
-        val = !Number(val) ? "" : val;
-      }
 
-      setPass(val);
-    } else if (act == "forgot") setForget(true);
-    else if (act == "pinlock") setType(0);
-    else if (act == "passkey") setType(1);
-
-    if (act == "pinlock" || act == "passkey") setPass("");
+    setLock(true);
+    
   };
 
   const proceed = async () => {
@@ -112,8 +104,8 @@ export const LockScreen = (props) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `https://thinkmay.net/`,
-        // redirectTo: `http://localhost:3000`,
+        //redirectTo: `https://thinkmay.net/`,
+        redirectTo: `http://localhost:3000`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
@@ -136,8 +128,8 @@ export const LockScreen = (props) => {
       style={{
         backgroundImage: `url(${`img/wallpaper/lock.jpg`})`,
       }}
-      onClick={action}
-      data-action="splash"
+      //onClick={action}
+      //data-action="splash"
       data-blur={lock}
     >
       <div className="splashScreen mt-40" data-faded={lock}>
@@ -156,6 +148,49 @@ export const LockScreen = (props) => {
           })}
         </div>
       </div>
+      {
+        lock == false && (<div className="text-gray-200 mt-[2em]">
+          <h2 className="text-center">Are you</h2>
+          <div className="flex gap-5 flex-wrap justify-center mt-[1em]">
+            <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
+              onClick={action}
+              data-action="splash"
+              data-user="B2C"
+            >
+              <h4 className="text-center">Want to</h4>
+              <p className="mt-[8px]">
+                <ReactTyped
+                  strings={["Play video game ", "Run blender ", "Run solid work "]}
+                  className="min-w-[70px] inline-block font-bold"
+                  typeSpeed={100}
+                  loop
+                  backSpeed={20}
+                  showCursor={false}
+                />
+                <span className="ml-[3px]">on all devices browser</span>
+              </p>
+            </div>
+            <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
+              onClick={action}
+              data-action="splash"
+              data-user="B2B"
+            >
+              <h4 className="text-center">Looking for</h4>
+              <div className="mt-[8px]">
+                <p className="ml-[3px]"><strong>Remote desktop</strong> solution for your</p>
+                <ReactTyped
+                  strings={["Render farm", "Cloud Gaming ", "Window cloud"]}
+                  className="w-full inline-block text-center"
+                  typeSpeed={100}
+                  loop
+                  backSpeed={20}
+                  showCursor={false}
+                />
+              </div>
+            </div>
+          </div>
+        </div>)
+      }
       <div className="fadeinScreen" data-faded={!lock} data-unlock={unlocked}>
         <Image
           className="rounded-2xl overflow-hidden"
