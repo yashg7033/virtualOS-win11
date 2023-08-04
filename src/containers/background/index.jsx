@@ -53,7 +53,6 @@ export const BootScreen = (props) => {
       <div className={blackout ? "hidden" : ""}>
         <Image src="asset/bootlogo" w={180} />
 
-
         <div className="mt-48" id="loader">
           <svg
             className="progressRing"
@@ -85,11 +84,9 @@ export const LockScreen = (props) => {
   const action = (e) => {
     var act = e.target.dataset.action,
       payload = e.target.dataset.payload;
-    const userType = e.target.dataset.user //B2B or B2C. Change at: data-user
-
+    const userType = e.target.dataset.user; //B2B or B2C. Change at: data-user
 
     setLock(true);
-    
   };
 
   const proceed = async () => {
@@ -148,11 +145,12 @@ export const LockScreen = (props) => {
           })}
         </div>
       </div>
-      {
-        lock == false && (<div className="text-gray-200 mt-[2em]">
+      {lock == false && (
+        <div className="text-gray-200 mt-[2em]">
           <h2 className="text-center">Are you</h2>
           <div className="flex gap-5 flex-wrap justify-center mt-[1em]">
-            <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
+            <div
+              className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
               onClick={action}
               data-action="splash"
               data-user="B2C"
@@ -160,7 +158,11 @@ export const LockScreen = (props) => {
               <h4 className="text-center">Want to</h4>
               <p className="mt-[8px]">
                 <ReactTyped
-                  strings={["Play video game ", "Run blender ", "Run solid work "]}
+                  strings={[
+                    "Play video game ",
+                    "Run blender ",
+                    "Run solid work ",
+                  ]}
                   className="min-w-[70px] inline-block font-bold"
                   typeSpeed={100}
                   loop
@@ -170,14 +172,17 @@ export const LockScreen = (props) => {
                 <span className="ml-[3px]">on all devices browser</span>
               </p>
             </div>
-            <div className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
+            <div
+              className=" rounded-md bg-[#d9d9d954] pt-[16px] pb-[24px] px-[56px] cursor-pointer"
               onClick={action}
               data-action="splash"
               data-user="B2B"
             >
               <h4 className="text-center">Looking for</h4>
               <div className="mt-[8px]">
-                <p className="ml-[3px]"><strong>Remote desktop</strong> solution for your</p>
+                <p className="ml-[3px]">
+                  <strong>Remote desktop</strong> solution for your
+                </p>
                 <ReactTyped
                   strings={["Render farm", "Cloud Gaming ", "Window cloud"]}
                   className="w-full inline-block text-center"
@@ -189,8 +194,8 @@ export const LockScreen = (props) => {
               </div>
             </div>
           </div>
-        </div>)
-      }
+        </div>
+      )}
       <div className="fadeinScreen" data-faded={!lock} data-unlock={unlocked}>
         <Image
           className="rounded-2xl overflow-hidden"
