@@ -86,17 +86,14 @@ const SupabaseFuncInvoke = async (funcName, options) => {
     const credential = await getCredentialHeader();
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const supabaseURL = import.meta.env.VITE_SUPABASE_URL;
-    const response = await fetch(
-      `${supabaseURL}/functions/v1/${funcName}`,
-      {
-        ...options,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${supabaseAnonKey}`,
-          Access_token: credential.access_token,
-        },
+    const response = await fetch(`${supabaseURL}/functions/v1/${funcName}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${supabaseAnonKey}`,
+        Access_token: credential.access_token,
       },
-    );
+    });
     if (response.ok === false) {
       const resText = await response.text();
       return { data: null, error: resText };
