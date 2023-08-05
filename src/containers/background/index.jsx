@@ -163,13 +163,13 @@ export const LockScreen = (props) => {
                     "Run blender ",
                     "Run solid work ",
                   ]}
-                  className="w-full text-center inline-block font-bold"
+                  className="min-w-[70px] inline-block font-bold"
                   typeSpeed={100}
                   loop
                   backSpeed={20}
                   showCursor={false}
                 />
-                <p className="w-full text-center">on all devices browser</p>
+                <span className="ml-[3px]">on all devices browser</span>
               </p>
             </div>
             <div
