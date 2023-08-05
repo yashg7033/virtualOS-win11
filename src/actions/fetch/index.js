@@ -85,8 +85,9 @@ const SupabaseFuncInvoke = async (funcName, options) => {
   try {
     const credential = await getCredentialHeader();
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabaseURL = import.meta.env.VITE_SUPABASE_URL;
     const response = await fetch(
-      `https://avmvymkexjarplbxwlnj.supabase.co/functions/v1/${funcName}`,
+      `${supabaseURL}/functions/v1/${funcName}`,
       {
         ...options,
         headers: {
