@@ -131,9 +131,6 @@ function App() {
   const refSource = urlParams.get("ref") ?? null;
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
-    if (window.location.host == "thinkmay.net")
-      logFEEvent(`from source ${refSource} ${user.email}`);
-
     AnalyticTrack(`source ${refSource}`);
     window.history.replaceState({}, document.title, "/" + "");
   }, []);
